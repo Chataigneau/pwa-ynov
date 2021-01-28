@@ -34,12 +34,17 @@ window.onload = function () {
 
 				galleryImage.append(imgHolder);
 
+				const favorite_img	 = [];
+
 				document.getElementById("gallery").appendChild(galleryImage);
 
 				likeButton.addEventListener("click", () => {
 					fetch(`http://localhost:3000/favorite?image=${encodeURIComponent(tinyImagePath[0])}` )
 					.then((response) => {
+						favorite_img.push(response);
 						console.log(response);
+						console.log(favorite_img);
+
 						navigator.serviceWorker.ready.then(
 							(serviceWorkerRegistration) => {
 								serviceWorkerRegistration.pushManager.subscribe(
